@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สร้างพอร์ตโฟลิโองานปักผ้า / แฮนด์เมด</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&family=Sarabun:wght@400;600&display=swap">
+<style>
+:root{--ink:#1B2540;--mut:#4A5167;--line:#C9CEDA;--bg:#E6E9F0;--ac:#D9A21B;--btn:#2F4A78}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Sarabun',system-ui,sans-serif}
+h1,h2,h3{font-family:'Prompt','Sarabun',sans-serif;margin:0}
+.app{display:grid;grid-template-columns:400px 1fr;min-height:100vh}
+.left{background:#fff;border-right:1px solid var(--line);padding:20px;overflow-y:auto;max-height:100vh;position:sticky;top:0}
+.left h1{font-size:20px;margin-bottom:4px}
+.left p.hint{margin:0 0 16px;color:var(--mut);font-size:14px}
+fieldset{border:0;border-top:1px solid var(--line);margin:0;padding:16px 0}
+legend{font:600 16px 'Prompt',sans-serif;padding:0 8px 0 0;float:left;width:100%;margin-bottom:10px}
+label.f{display:block;margin-bottom:10px;font-size:14px;color:var(--mut)}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;margin-top:3px}
+textarea{min-height:76px;resize:vertical}
+:focus-visible{outline:3px solid var(--btn);outline-offset:2px}
+button{font:600 15px 'Sarabun',sans-serif;min-height:44px;padding:0 16px;border-radius:6px;border:2px solid var(--btn);background:#fff;color:var(--btn);cursor:pointer}
+button.p{background:var(--btn);color:#fff}
+button.lk{border:0;background:none;color:#9B2C2C;min-height:36px;padding:0 4px;text-decoration:underline}
+.sw{display:flex;gap:10px}
+.sw label{position:relative}
+.sw input{position:absolute;opacity:0}
+.sw span{display:block;width:36px;height:36px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.sw input:checked+span{box-shadow:0 0 0 3px var(--ink)}
+.sw input:focus-visible+span{outline:3px solid var(--btn);outline-offset:3px}
+.wk{border:1px solid var(--line);border-radius:6px;padding:10px;margin-bottom:10px}
+.wr{display:flex;gap:10px}
+.up{position:relative;flex:0 0 84px;height:84px;border:2px dashed var(--ac);border-radius:6px;background:#F3F0E6;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mut);cursor:pointer;overflow:hidden;text-align:center}
+.up:focus-within{outline:3px solid var(--btn);outline-offset:2px}
+.up img{width:100%;height:100%;object-fit:cover}
+.up input,.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.wf{flex:1}
+.wf input{margin:0 0 6px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;padding:12px 24px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2;align-items:center}
+#st{color:var(--mut);font-size:14px;margin-left:auto}
+.stage{padding:24px;overflow-x:auto}
+.doc{width:794px;max-width:100%;margin:0 auto;background:#fff;padding:48px;box-shadow:0 1px 4px rgba(27,37,64,.18);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.doc .st{border-top:3px dashed var(--ac);margin:18px 0}
+.cover{display:flex;flex-direction:column;gap:6px}
+.brand{font:700 22px 'Prompt',sans-serif}
+.tag{color:var(--mut)}
+.hl{font:700 38px/1.25 'Prompt',sans-serif;margin:10px 0 6px}
+.intro{font-size:18px;white-space:pre-line;max-width:60ch}
+.ph{border:2px dashed var(--ac);background:#F3F0E6;display:flex;align-items:center;justify-content:center;color:var(--mut);font-size:14px;text-align:center}
+.cimg{width:100%;height:380px;object-fit:cover;border-radius:4px;margin-top:14px}
+.doc h2{font-size:26px;margin:28px 0 12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{break-inside:avoid}
+.card img,.card .ph{width:100%;height:210px;object-fit:cover;border-radius:4px}
+.card h3{font-size:18px;margin:8px 0 0}
+.card p{margin:0;color:var(--mut);font-size:15px}
+.about{white-space:pre-line;max-width:62ch}
+.nums{display:flex;gap:36px;margin-top:14px}
+.nums b{font:700 30px 'Prompt',sans-serif;display:block;line-height:1.2}
+.info{display:flex;gap:30px;flex-wrap:wrap;margin:6px 0 14px}
+.info div{min-width:120px}.info b{display:block;font-size:14px;color:var(--mut);font-weight:600}
+.doc ol{margin:0;padding-left:22px}
+.ct{display:flex;gap:34px;flex-wrap:wrap}.ct b{display:block;font-size:14px;color:var(--mut);font-weight:600}
+.sec{break-inside:avoid}
+@media (max-width:980px){.app{grid-template-columns:1fr}.left{position:static;max-height:none}.doc{padding:24px}.grid{grid-template-columns:1fr}.hl{font-size:30px}}
+@media print{
+@page{size:A4;margin:12mm}
+body{background:#fff}
+.left,.bar{display:none!important}
+.app{display:block}
+.stage{padding:0;overflow:visible}
+.doc{width:auto;box-shadow:none;padding:0;margin:0}
+.cover{break-after:page}
+.cimg{height:340px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="left" aria-label="กรอกข้อมูล">
+<h1>กรอกข้อมูลพอร์ตโฟลิโอ</h1>
+<p class="hint">พิมพ์แล้วดูตัวอย่างทางขวาได้ทันที ข้อมูลถูกจดจำไว้ในเบราว์เซอร์นี้</p>
+<div id="ed"></div>
+<fieldset><legend>สีเน้น (สีด้าย)</legend>
+<div class="sw" id="sw"></div></fieldset>
+<fieldset><legend>รูปปก</legend>
+<label class="up" style="width:100%;flex:none;height:110px" id="cv"></label></fieldset>
+<fieldset><legend>ผลงาน</legend>
+<div id="wl"></div>
+<button type="button" id="add">เพิ่มผลงาน</button></fieldset>
+</aside>
+<main>
+<div class="bar">
+<button type="button" class="p" id="pdf">บันทึกเป็น PDF</button>
+<button type="button" id="exp">สำรองข้อมูล</button>
+<button type="button" id="imp">นำเข้าข้อมูล</button>
+<input type="file" id="impf" accept="application/json" class="vh">
+<button type="button" id="rst">ล้างข้อมูล</button>
+<span id="st" role="status" aria-live="polite"></span>
+</div>
+<div class="stage"><article class="doc" id="pv"></article></div>
+</main>
+</div>
+<script>
+const KEY='portfolio-app-v1';
+const COLORS=[['#D9A21B','เหลืองมัสตาร์ด'],['#B5412F','แดงเลือดหมู'],['#1F8A8A','เขียวหยก'],['#C2457A','ชมพูกุหลาบ']];
+const FIELDS=[
+['ข้อมูลแบรนด์',[['brand','ชื่อแบรนด์'],['tagline','สโลแกนสั้น ๆ'],['headline','หัวข้อหลัก','t'],['intro','แนะนำตัวสั้น ๆ','t']]],
+['เกี่ยวกับคุณ',[['about','เรื่องราวและจุดเด่นของงาน','t'],['years','ประสบการณ์ (ปี)'],['pieces','จำนวนชิ้นงานที่ส่งมอบ']]],
+['การสั่งทำ',[['price','ราคาเริ่มต้น (บาท)'],['moq','จำนวนขั้นต่ำ'],['lead','ระยะเวลาผลิต'],['steps','ขั้นตอนการสั่งทำ (1 บรรทัด = 1 ขั้น)','t']]],
+['ช่องทางติดต่อ',[['line','LINE'],['ig','Instagram / Facebook'],['phone','เบอร์โทร']]]];
+const DEF={brand:'ชื่อแบรนด์ของคุณ',tagline:'งานปักผ้าและงานแฮนด์เมด',headline:'ทุกเข็มปักด้วยมือ เพื่อของที่มีเพียงชิ้นเดียว',intro:'รับปักชื่อ ปักลาย และทำของขวัญแฮนด์เมดตามสั่ง ออกแบบร่วมกับลูกค้าทุกขั้นตอน',about:'เล่าที่มาของงานคุณ เริ่มปักผ้าตั้งแต่เมื่อไร ใช้ผ้าและด้ายแบบไหน และอะไรทำให้งานของคุณไม่เหมือนใคร',years:'',pieces:'',price:'',moq:'',lead:'',steps:'คุยแบบและลาย\nยืนยันแบบร่างและราคา\nลงมือปักด้วยมือ\nตรวจงานและจัดส่ง',line:'',ig:'',phone:'',color:COLORS[0][0],cover:'',
+works:[{img:'',title:'ปักชื่อ / โมโนแกรม',desc:'ผ้าเช็ดหน้า ผ้ากันเปื้อน'},{img:'',title:'กระเป๋าผ้าปัก',desc:'ลายดอกไม้ ลายเฉพาะตัว'},{img:'',title:'ของชำร่วย / ของขวัญ',desc:'งานแต่ง งานรับปริญญา'}]};
+let S;
+try{S=Object.assign({},DEF,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){S=structuredClone(DEF)}
+const $=id=>document.getElementById(id);
+const esc=t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function msg(t){$('st').textContent=t;clearTimeout(msg.t);msg.t=setTimeout(()=>$('st').textContent='',3500)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){msg('พื้นที่เก็บข้อมูลเต็ม ลองลดจำนวนรูปหรือกด "สำรองข้อมูล"')}}
+function resize(file,cb){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.82))};im.onerror=()=>msg('เปิดไฟล์รูปนี้ไม่ได้');im.src=r.result};r.readAsDataURL(file)}
+function buildEditor(){
+$('ed').innerHTML=FIELDS.map(([g,fs])=>`<fieldset><legend>${g}</legend>${fs.map(([k,l,t])=>`<label class="f">${l}${t?`<textarea data-k="${k}">${esc(S[k])}</textarea>`:`<input type="text" data-k="${k}" value="${esc(S[k])}">`}</label>`).join('')}</fieldset>`).join('');
+$('sw').innerHTML=COLORS.map(([c,n])=>`<label><input type="radio" name="ac" value="${c}" ${S.color===c?'checked':''}><span style="background:${c}" title="${n}"></span><span class="vh">${n}</span></label>`).join('');
+coverUI();worksUI()}
+function coverUI(){$('cv').innerHTML=(S.cover?`<img src="${S.cover}" alt="รูปปก">`:'<span>เลือกรูปปก</span>')+'<input type="file" accept="image/*" id="cvf">'}
+function worksUI(){$('wl').innerHTML=S.works.map((w,i)=>`<div class="wk"><div class="wr"><label class="up">${w.img?`<img src="${w.img}" alt="">`:'<span>เพิ่มรูป</span>'}<input type="file" accept="image/*" data-fi="${i}"></label><div class="wf"><input type="text" data-wi="${i}" data-wk="title" value="${esc(w.title)}" placeholder="ชื่อผลงาน" aria-label="ชื่อผลงาน"><input type="text" data-wi="${i}" data-wk="desc" value="${esc(w.desc)}" placeholder="วัสดุ / ขนาด" aria-label="รายละเอียด"></div></div><button type="button" class="lk" data-del="${i}">ลบผลงานนี้</button></div>`).join('')}
+function info(l,v){return v?`<div><b>${l}</b>${esc(v)}</div>`:''}
+function render(){
+const s=S,steps=s.steps.split('\n').map(x=>x.trim()).filter(Boolean);
+$('pv').style.setProperty('--ac',s.color);
+$('pv').innerHTML=`<section class="cover"><div class="brand">${esc(s.brand)}</div><div class="tag">${esc(s.tagline)}</div><div class="st"></div><h1 class="hl">${esc(s.headline)}</h1><p class="intro">${esc(s.intro)}</p>${s.cover?`<img class="cimg" src="${s.cover}" alt="">`:'<div class="ph cimg">[รูปปก]</div>'}</section>
+<section><h2>ผลงาน</h2><div class="grid">${s.works.map(w=>`<div class="card">${w.img?`<img src="${w.img}" alt="${esc(w.title)}">`:'<div class="ph">[รูปผลงาน]</div>'}<h3>${esc(w.title)}</h3><p>${esc(w.desc)}</p></div>`).join('')}</div></section>
+<div class="st"></div>
+<section class="sec"><h2>เกี่ยวกับเรา</h2><p class="about">${esc(s.about)}</p>${s.years||s.pieces?`<div class="nums">${s.years?`<div><b>${esc(s.years)} ปี</b>ประสบการณ์</div>`:''}${s.pieces?`<div><b>${esc(s.pieces)}</b>ชิ้นงานที่ส่งมอบ</div>`:''}</div>`:''}</section>
+<section class="sec"><h2>การสั่งทำ</h2><div class="info">${info('ราคาเริ่มต้น',s.price&&s.price+' บาท')}${info('ขั้นต่ำ',s.moq)}${info('ระยะเวลาผลิต',s.lead)}</div>${steps.length?`<ol>${steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:''}</section>
+<div class="st"></div>
+<section class="sec"><h2>ติดต่อ</h2><div class="ct">${info('LINE',s.line)}${info('Instagram / Facebook',s.ig)}${info('โทร',s.phone)}</div></section>`}
+document.addEventListener('input',e=>{const t=e.target;
+if(t.dataset.k){S[t.dataset.k]=t.value}
+else if(t.dataset.wi){S.works[+t.dataset.wi][t.dataset.wk]=t.value}
+else return;save();render()});
+document.addEventListener('change',e=>{const t=e.target;
+if(t.name==='ac'){S.color=t.value;save();render()}
+else if(t.id==='cvf'&&t.files[0]){resize(t.files[0],d=>{S.cover=d;save();coverUI();render()})}
+else if(t.dataset.fi&&t.files[0]){const i=+t.dataset.fi;resize(t.files[0],d=>{S.works[i].img=d;save();worksUI();render()})}
+else if(t.id==='impf'&&t.files[0]){const r=new FileReader();r.onload=()=>{try{S=Object.assign({},DEF,JSON.parse(r.result));save();buildEditor();render();msg('นำเข้าข้อมูลแล้ว')}catch(x){msg('ไฟล์สำรองนี้ใช้ไม่ได้')}};r.readAsText(t.files[0]);t.value=''}});
+document.addEventListener('click',e=>{const t=e.target;
+if(t.dataset.del){S.works.splice(+t.dataset.del,1);save();worksUI();render()}
+else if(t.id==='add'){S.works.push({img:'',title:'',desc:''});save();worksUI();render()}
+else if(t.id==='pdf'){window.print()}
+else if(t.id==='exp'){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='portfolio-data.json';a.click();msg('ดาวน์โหลดไฟล์สำรองแล้ว')}
+else if(t.id==='imp'){$('impf').click()}
+else if(t.id==='rst'&&confirm('ล้างข้อมูลทั้งหมดและเริ่มใหม่ใช่ไหม')){S=structuredClone(DEF);save();buildEditor();render();msg('ล้างข้อมูลแล้ว')}});
+buildEditor();render();
+</script>
+</body>
+</html>
